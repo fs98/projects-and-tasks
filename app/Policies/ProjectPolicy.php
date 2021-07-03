@@ -96,4 +96,17 @@ class ProjectPolicy
     {
         //
     }
+
+    /**
+     * Determine whether the user can upload a file.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Project  $project
+     * @return mixed
+     */
+    public function upload(User $user, Project $project)
+    {
+        //
+        return $user->id == $project->user_id;
+    }
 }

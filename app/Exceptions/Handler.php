@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -89,9 +90,18 @@ class Handler extends ExceptionHandler
 
             }
 
-            return response(['status' => 'Error', 'error' => 'Something went wrong.'], 500);
+            if ($e instanceof ThrottleRequestsException) {
+                
+                return response([
+                    'status' => 'error',
+                    'error' => $e->getMessage()
+                ], 429);
+
+            }
 
             // dd($e);
+            return response(['status' => 'Error', 'error' => 'Something went wrong.'], 500);
+
 
         }
         parent::render($request, $e);

@@ -29,6 +29,7 @@ class ProjectsContoller extends Controller
     {
         $projects = auth()->user()
                     ->projects()
+                    ->withCount('tasks')
                     ->paginate();
         // return $projects;
         return new ProjectCollection($projects);
@@ -57,6 +58,7 @@ class ProjectsContoller extends Controller
     {
         //
         // return $project;
+        $tasks = $project->tasks;
         return new ProjectResource($project);
     }
 
@@ -71,6 +73,7 @@ class ProjectsContoller extends Controller
     {
         //
         $project->update($request->all());
+        $tasks = $project->tasks;
         return new ProjectResource($project);
     }
 

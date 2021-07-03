@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProjectsContoller;
+use App\Http\Controllers\Api\TasksController;
+use App\Http\Controllers\Api\FilesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +22,10 @@ Route::post('/authenticate', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('projects', ProjectsContoller::class);
+    Route::apiResource('tasks', TasksController::class)->except([
+        'index', 'show'
+    ]);
+    Route::post('upload', [FilesController::class, 'store']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
