@@ -10,11 +10,19 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@vue/compiler-sfc": "^3.1.4",
         "axios": "^0.21",
         "browser-sync": "^2.27.4",
         "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "^6.0.6",
+        "laravel-mix-vue3": "^0.7.0",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "vue-loader": "^16.3.0"
+    },
+    "dependencies": {
+        "postcss-import": "^14.0.2",
+        "tailwindcss": "^2.2.4",
+        "vue": "^3.1.4"
     }
 }
