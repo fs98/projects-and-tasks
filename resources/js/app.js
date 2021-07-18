@@ -2,10 +2,14 @@ require('./bootstrap');
 
 import { createApp } from 'vue';
 import router from './routes';
+import axios from 'axios';
 
-import ExampleComponent from './components/ExampleComponent.vue';
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
-const app = createApp(ExampleComponent)
+import App from './components/App.vue';
+
+const app = createApp(App)
 
 app.use(router);
 app.mount('#app');

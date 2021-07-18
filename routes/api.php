@@ -28,6 +28,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('upload', [FilesController::class, 'store']);
 });
 
+// Login
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+// Logout
+Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
+    $user = $request->user();
+    $user->tokens()->delete();
+    Auth::guard('web')->logout();
+    return ['status' => 'OK'];
 });
